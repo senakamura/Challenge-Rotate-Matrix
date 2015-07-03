@@ -13,26 +13,33 @@ var Direction = require("./Direction").Direction;
 
 function MatrixRotator(matrix){
   this.matrix = matrix;
-  // console.log(matrix);
 };
 
 //                                         |-- Must be Direction.CW
 //                                         v        or Direction.CCW
 MatrixRotator.prototype.rotate = function(direction) {
-  var thisMatrix = this.matrix;
+  var matrix = this.matrix;
+  var newMatrix = [];
   if(direction === Direction.CW){
-    clockwise(thisMatrix);
+    for (var i = 0; i < matrix.length; i++){
+      var temp = [];
+      for (var j = 0; j < matrix[i].length; j++){
+        temp.unshift(matrix[j][i]);
+      }
+      newMatrix.push(temp);
+    }
+    console.log(newMatrix);
   }
+
   if(direction === Direction.CCW){
-    counterClockwise(thisMatrix);
+    for (var i = 0; i < matrix.length; i++){
+      var temp = [];
+      for (var j = 0; j < matrix[i].length; j++){
+        temp.push(matrix[j][i]);
+      }
+      newMatrix.unshift(temp);
+    }
   }
+
+  this.matrix = newMatrix;
 };
-
-function clockwise (matrix){
-  console.log('this is CW');
-  console.log(matrix);
-}
-
-function counterClockwise(matrix){
-  console.log('this is CCW');
-}
